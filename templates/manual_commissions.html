@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Commissions Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        
+
+       
+
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('home') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Home</span>
+            </a>
+            <h1 class="text-center">Manual Commissions Table</h1>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('upload_commissions') }}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload Excel File:</label>
+                <input type="file" class="form-control-file" id="file" name="file" accept=".xlsx" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        
+
+        <form method="GET" action="{{ url_for('manual_commissions') }}" class="form-inline mb-3">
+            <select class="form-control mr-2" name="field">
+                <option value="COMMID" {% if search_field == 'COMMID' %}selected{% endif %}>COMMID</option>
+                <option value="RETAILERID" {% if search_field == 'RETAILERID' %}selected{% endif %}>Retailer ID</option>
+                <option value="MSISDN" {% if search_field == 'MSISDN' %}selected{% endif %}>MSISDN</option>
+                <option value="COMMISSION_TYPE" {% if search_field == 'COMMISSION_TYPE' %}selected{% endif %}>Commission Type</option>
+                <option value="VALUE" {% if search_field == 'VALUE' %}selected{% endif %}>Value</option>
+                <!-- Add more fields as needed -->
+            </select>
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>COMMID</th>
+                        <th>Business Partner Code</th>
+                        <th>MSISDN</th>
+                        <th>COMMISSION TYPE</th>
+                        <th>ADJUSTMENT DATE</th>
+                        <th>DESCRIPTION</th>
+                        <th>VALUE</th>
+                        <th>TAX_RATE</th>
+                        <th>GST</th>
+                        <th>GST WITHHELD</th>
+                        <th>WHT TAX</th>
+                        <th>NET COMMISSION</th>
+                        <th>STATUS</th>
+                        <th>CORELATION_ID</th>
+                        <th>ERROR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>{{ row[8] }}</td>
+                        <td>{{ row[9] }}</td>
+                        <td>{{ row[10] }}</td>
+                        <td>{{ row[11] }}</td>
+                        <td>{{ row[12] }}</td>
+                        <td>{{ row[13] }}</td>
+                        <td>{{ row[14] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('manual_commissions', page=page-1, search=search_query) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('manual_commissions', page=p, search=search_query) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('manual_commissions', page=page+1, search=search_query) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Hide the flash message after 5 seconds
+        setTimeout(function() {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
+
+
+

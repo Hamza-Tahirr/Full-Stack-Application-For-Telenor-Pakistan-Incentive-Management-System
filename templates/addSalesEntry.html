@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Add New Sales Transaction</h1>
+        <form method="POST" action="{{ url_for('addSalesEntry') }}">
+            <div class="form-group">
+                <label for="salestransactionseq">Sales Transaction Seq</label>
+                <input type="text" class="form-control" id="salestransactionseq" name="salestransactionseq" >
+            </div>
+            <div class="form-group">
+                <label for="orderid">Order ID</label>
+                <input type="text" class="form-control" id="orderid" name="orderid" required>
+            </div>
+            <div class="form-group">
+                <label for="channel">Channel</label>
+                <input type="text" class="form-control" id="channel" name="channel" required>
+            </div>
+            <div class="form-group">
+                <label for="productid">Product ID</label>
+                <input type="text" class="form-control" id="productid" name="productid" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute1">Generic Attribute 1</label>
+                <input type="text" class="form-control" id="genericattribute1" name="genericattribute1" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute2">Generic Attribute 2</label>
+                <input type="text" class="form-control" id="genericattribute2" name="genericattribute2" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute3">Generic Attribute 3</label>
+                <input type="text" class="form-control" id="genericattribute3" name="genericattribute3" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute12">Generic Attribute 12</label>
+                <input type="text" class="form-control" id="genericattribute12" name="genericattribute12" required>
+            </div>
+            <div class="form-group">
+                <label for="linenumber">Line Number</label>
+                <input type="text" class="form-control" id="linenumber" name="linenumber" required>
+            </div>
+            <div class="form-group">
+                <label for="sublinenumber">Subline Number</label>
+                <input type="text" class="form-control" id="sublinenumber" name="sublinenumber" required>
+            </div>
+            <div class="form-group">
+                <label for="eventtype">Event Type</label>
+                <input type="text" class="form-control" id="eventtype" name="eventtype" required>
+            </div>
+            <div class="form-group">
+                <label for="origintypeid">Origin Type ID</label>
+                <input type="text" class="form-control" id="origintypeid" name="origintypeid" required>
+            </div>
+            <div class="form-group">
+                <label for="compensationdate">Compensation Date</label>
+                <input type="text" class="form-control" id="compensationdate" name="compensationdate" required>
+            </div>
+            <div class="form-group">
+                <label for="isrunnable">Is Runnable</label>
+                <input type="text" class="form-control" id="isrunnable" name="isrunnable" required>
+            </div>
+            <div class="form-group">
+                <label for="preadjustedvalue">Pre Adjusted Value</label>
+                <input type="text" class="form-control" id="preadjustedvalue" name="preadjustedvalue" required>
+            </div>
+            <div class="form-group">
+                <label for="unittypeforpreadjustedvalue">Unit Type For Pre Adjusted Value</label>
+                <input type="text" class="form-control" id="unittypeforpreadjustedvalue" name="unittypeforpreadjustedvalue" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Value</label>
+                <input type="text" class="form-control" id="value" name="value" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Unit Type For Value</label>
+                <input type="text" class="form-control" id="unittypeforvalue" name="unittypeforvalue" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Modification Date</label>
+                <input type="text" class="form-control" id="modificationdate" name="modificationdate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Entries</button>
+        </form>
+    </div>
+</body>
+</html>

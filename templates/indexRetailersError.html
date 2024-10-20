@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailers Error Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/homebutton.css">
+</head>
+<body>
+    <div class="container mt-5">
+         <!-- Home Button with Icon -->
+         <div class="mb-3 text-left">
+            <a href="{{ url_for('home') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Home</span>
+            </a>
+            <h1 class="text-center">Retailers Error Table</h1>
+        </div>
+        <!-- <h1 class="text-center">Retailer Table</h1> -->
+        <form method="GET" action="{{ url_for('indexRetailersError') }}" class="form-inline mb-3">
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search by Retailer ID" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Actions</th>
+                    <th>Retailer ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>NTN</th>
+                    <th>Retailer MSISDN</th>
+                    <th>Zone</th>
+                    <th>CNIC</th>
+                    <th>Parent Code</th>
+                    <th>City</th>
+                    <th>Region</th>
+                    <th>Contact Person</th>
+                    <th>Partner Postal Address</th>
+                    <th>RSO Code</th>
+                    <th>Tax Combination</th>
+                    <th>Email Address</th>
+                    <th>Category Name</th>
+                    <th>Lattitude</th>
+                    <th>Longitude</th>
+                    <th>Contact Number</th>
+                    <th>WHT Tax Rate</th>
+                    <th>GST Tax Rate</th>
+                    <th>GST Withheld</th>
+                    <th>Agg Tax Rate</th>
+                    <th>Partner Type ID</th>
+                    <th>Partner Class ID</th>
+                    <th>Creation Date</th>
+                    <th>Update Date</th>
+                    <th>Creation End Date</th>
+                    <th>Tax Exempted Flag</th>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Is Last</th>
+                    <th>Create Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('editRetailersError', retailerid=row[0]) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ url_for('deleteRetailersError', retailerid=row[0]) }}" method="POST" style="display:inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row[11] }}</td>
+                    <td>{{ row[12] }}</td>
+                    <td>{{ row[13] }}</td>
+                    <td>{{ row[14] }}</td>
+                    <td>{{ row[15] }}</td>
+                    <td>{{ row[16] }}</td>
+                    <td>{{ row[17] }}</td>
+                    <td>{{ row[18] }}</td>
+                    <td>{{ row[19] }}</td>
+                    <td>{{ row[20] }}</td>
+                    <td>{{ row[21] }}</td>
+                    <td>{{ row[22] }}</td>
+                    <td>{{ row[23] }}</td>
+                    <td>{{ row[24] }}</td>
+                    <td>{{ row[25] }}</td>
+                    <td>{{ row[26] }}</td>
+                    <td>{{ row[27] }}</td>
+                    <td>{{ row[28] }}</td>
+                    <td>{{ row[29] }}</td>
+                    <td>{{ row[30] }}</td>
+                    <td>{{ row[31] }}</td>
+                    <td>{{ row[32] }}</td>
+                    <td>{{ row[33] }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexRetailersError', page=page-1, search=search_query) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% if page > 4 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexRetailersError', page=1, search=search_query) }}">1</a>
+            </li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+
+            {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('indexRetailersError', page=p, search=search_query) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if page < total_pages - 3 %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexRetailersError', page=total_pages, search=search_query) }}">{{ total_pages }}</a>
+            </li>
+            {% endif %}
+
+            {% if page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexRetailersError', page=page+1, search=search_query) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Lookup</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexZmdlt') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Lookup Table</span>
+            </a>
+            <h1 class="text-center">Lookup Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                										
+                <tr>
+                    <th>StartDate</th>
+                    <td>{{ lookup[0] }}</td>
+                </tr>
+                <tr>
+                    <th>EndDate</th>
+                    <td>{{ lookup[1] }}</td>
+                </tr>
+                <tr>
+                    <th>CompaignName</th>
+                    <td>{{ lookup[2] }}</td>
+                </tr>
+                <tr>
+                    <th>FranchiseID</th>
+                    <td>{{ lookup[3] }}</td>
+                </tr>
+                <tr>
+                    <th>ProductID</th>
+                    <td>{{ lookup[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Commision</th>
+                    <td>{{ lookup[5] }}</td>
+                </tr>
+                <tr>
+                    <th>UnitType</th>
+                    <td>{{ lookup[6] }}</td>
+                </tr>
+                <tr>
+                    <th>ModificationDate</th>
+                    <td>{{ lookup[7] }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ lookup[8] }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ lookup[9] }}</td>
+                </tr>
+                <tr>
+                    <th>EventType</th>
+                    <td>{{ lookup[10] }}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

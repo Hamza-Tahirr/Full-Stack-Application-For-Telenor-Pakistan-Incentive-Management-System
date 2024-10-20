@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Campaign</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Campaign</h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="campaignname">Campaign Name</label>
+                <input type="text" class="form-control" id="campaignname" name="campaignname" value="{{ entry[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="startdate">Start Date</label>
+                <input type="date" class="form-control" id="startdate" name="startdate" value="{{ entry[2] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date</label>
+                <input type="date" class="form-control" id="enddate" name="enddate" value="{{ entry[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" value="{{ entry[4] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="targetcount">Target Count</label>
+                <input type="number" class="form-control" id="targetcount" name="targetcount" value="{{ entry[5] }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexTbCampaign') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2 on any dropdowns if needed
+            // Example: $('#status').select2({ placeholder: 'Select a Status' });
+
+            // Set up the date validation logic
+            $('#startdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                $('#enddate').attr('min', $(this).val());
+            });
+
+            $('#enddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#startdate').val());
+
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

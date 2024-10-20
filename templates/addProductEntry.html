@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Entry</title>
+    <link rel="stylesheet" href="/static/homebutton.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexProducts') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Product Table</span>
+            </a>
+            <h1 class="text-center">Add Product Entry</h1>
+        </div>
+
+        <!-- Flash message block -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div id="flash-message" class="alert alert-warning">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    
+        <form method="POST" action="{{ url_for('addProductEntry') }}">
+            <div class="form-group">
+                <label for="effectivestartdate">Effective Start Date</label>
+                <input type="datetime-local" class="form-control" id="effectivestartdate" name="effectivestartdate" required>
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">Effective End Date</label>
+                <input type="datetime-local" class="form-control" id="effectiveenddate" name="effectiveenddate" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="unittypeforprice">Unit Type for Price</label>
+                <select class="form-control" id="unittypeforprice" name="unittypeforprice" required>
+                    <option value="PKR">PKR</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Product</button>
+            <a href="{{ url_for('indexProducts') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Hide flash message after 10 seconds
+            setTimeout(function() {
+                $('#flash-message').fadeOut('slow');
+            }, 10000); // 10000 milliseconds = 10 seconds
+
+            // Function to add minutes to the start date
+            function addMinutesToDate(date, minutes) {
+                return new Date(date.getTime() + minutes * 2000);
+            }
+
+            // Set up the date validation logic
+            $('#effectivestartdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                var endDate = addMinutesToDate(startDate, 2);
+
+                // Set end date 2 minutes ahead of start date
+                $('#effectiveenddate').val(endDate.toISOString().slice(0, 16));
+                $('#effectiveenddate').attr('min', $(this).val());
+            });
+
+            $('#effectiveenddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#effectivestartdate').val());
+                
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');  // Clear the end date input
+                }
+            });
+        });
+    </script>
+</body>
+</html>

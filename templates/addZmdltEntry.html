@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Look Up Entry</title>
+    <link rel="stylesheet" href="/static/homebutton.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+
+    <style>
+        /* Adjust the width of the select2 container */
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Home Button with Icon -->
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexZmdlt') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Look Up Table</span>
+            </a>
+            <h1 class="text-center">Add Look Up Entry</h1>
+        </div>
+
+        <form method="POST" action="{{ url_for('addZmdltEntry') }}">
+            <div class="form-group">
+                <label for="effectivestartdate">Effective Start Date</label>
+                <input type="date" class="form-control" id="effectivestartdate" name="effectivestartdate" required>
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">Effective End Date</label>
+                <input type="date" class="form-control" id="effectiveenddate" name="effectiveenddate" required>
+            </div>
+            <div class="form-group">
+                <label for="mdltname">Campaign Name</label>
+                <input type="text" class="form-control" id="mdltname" name="mdltname" required>
+            </div>
+            <div class="form-group">
+                <label for="dim0">Franchise ID</label>
+                <select class="form-control" id="dim0" name="dim0" required>
+                    {% for franchise in franchises %}
+                        <option value="{{ franchise[0] }}">{{ franchise[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dim1">Product ID</label>
+                <select class="form-control" id="dim1" name="dim1" required>
+                    {% for product in products %}
+                        <option value="{{ product[0] }}">{{ product[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="value">Commission</label>
+                <input type="text" class="form-control" id="value" name="value" required>
+            </div>
+          
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2 on the dropdowns
+            $('#dim0').select2({
+                placeholder: 'Select a Franchise ID'
+            });
+            $('#dim1').select2({
+                placeholder: 'Select a Product ID'
+            });
+
+            // Function to add minutes to the start date
+            function addMinutesToDate(date, minutes) {
+                return new Date(date.getTime() + minutes * 60000);
+            }
+
+            // Set up the date validation logic
+            $('#effectivestartdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                var endDate = addMinutesToDate(startDate, 2);
+
+                // Set end date 2 minutes ahead of start date
+                $('#effectiveenddate').val(endDate.toISOString().slice(0, 16));
+                $('#effectiveenddate').attr('min', $(this).val());
+            });
+
+            $('#effectiveenddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#effectivestartdate').val());
+                
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');  // Clear the end date input
+                }
+            });
+        });
+    </script>
+</body>
+</html>

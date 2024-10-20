@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Retailer</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/homebutton.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexRetailers') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Retailers Table</span>
+            </a>
+            <h1 class="text-center">Add New Retailer</h1>
+        </div>
+        
+        <form method="POST" action="{{ url_for('addRetailerEntry') }}">
+            <div class="form-group">
+                <label for="retailerid">Retailer ID</label>
+                <input type="text" class="form-control" id="retailerid" name="retailerid" required>
+            </div>
+            <div class="form-group">
+                <label for="effectivestartdate">Start Date</label>
+                <input type="datetime-local" class="form-control" id="effectivestartdate" name="effectivestartdate" required>
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">End Date</label>
+                <input type="datetime-local" class="form-control" id="effectiveenddate" name="effectiveenddate" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute1">NTN</label>
+                <input type="text" class="form-control" id="genericattribute1" name="genericattribute1" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute2">Retailer MSISDN</label>
+                <input type="text" class="form-control" id="genericattribute2" name="genericattribute2" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute3">Zone</label>
+                <input type="text" class="form-control" id="genericattribute3" name="genericattribute3" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute4">CNIC</label>
+                <input type="text" class="form-control" id="genericattribute4" name="genericattribute4" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute5">Franchise ID</label>
+                <input type="text" class="form-control" id="genericattribute5" name="genericattribute5" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute6">City</label>
+                <input type="text" class="form-control" id="genericattribute6" name="genericattribute6" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute7">Region</label>
+                <input type="text" class="form-control" id="genericattribute7" name="genericattribute7" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute8">Contact Person</label>
+                <input type="text" class="form-control" id="genericattribute8" name="genericattribute8" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute9">Partner Postal Address</label>
+                <input type="text" class="form-control" id="genericattribute9" name="genericattribute9" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute10">RSO Code</label>
+                <input type="text" class="form-control" id="genericattribute10" name="genericattribute10" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute11">Tax Combination</label>
+                <input type="text" class="form-control" id="genericattribute11" name="genericattribute11" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute12">Email Address</label>
+                <input type="text" class="form-control" id="genericattribute12" name="genericattribute12" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute13">Category Name</label>
+                <input type="text" class="form-control" id="genericattribute13" name="genericattribute13" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute14">Lattitude</label>
+                <input type="text" class="form-control" id="genericattribute14" name="genericattribute14" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute15">Longitude</label>
+                <input type="text" class="form-control" id="genericattribute15" name="genericattribute15" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute16">Contact Number</label>
+                <input type="text" class="form-control" id="genericattribute16" name="genericattribute16" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber1">WHT Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber1" name="genericnumber1" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber2">GST Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber2" name="genericnumber2" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber3">GST Withheld</label>
+                <input type="text" class="form-control" id="genericnumber3" name="genericnumber3" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber4">Agg Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber4" name="genericnumber4" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber5">Partner Type ID</label>
+                <input type="text" class="form-control" id="genericnumber5" name="genericnumber5" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber6">Partner Class ID</label>
+                <input type="text" class="form-control" id="genericnumber6" name="genericnumber6" required>
+            </div>
+            <div class="form-group">
+                <label for="genericboolean1">Tax Exempted Flag</label>
+                <select class="form-control" id="genericboolean1" name="genericboolean1" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="genericboolean2">Status</label>
+                <select class="form-control" id="genericboolean2" name="genericboolean2" required>
+                    <option value="1">Active</option>
+                    <option value="0">Not Active</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="genericdate1">Creation Date</label>
+                <input type="datetime-local" class="form-control" id="genericdate1" name="genericdate1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Retailer</button>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Function to add minutes to the start date
+            function addMinutesToDate(date, minutes) {
+                return new Date(date.getTime() + minutes * 2000);
+            }
+
+            // Set up the date validation logic
+            $('#effectivestartdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                var endDate = addMinutesToDate(startDate, 2);
+
+                // Set end date 2 minutes ahead of start date
+                $('#effectiveenddate').val(endDate.toISOString().slice(0, 16));
+                $('#effectiveenddate').attr('min', $(this).val());
+            });
+
+            $('#effectiveenddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#effectivestartdate').val());
+                
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');  // Clear the end date input
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Entry</h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="retailerid">Retailer ID</label>
+                <input type="text" class="form-control" id="retailerid" name="retailerid" value="{{ entry[0] }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="effectivestartdate">Start Date</label>
+                <input type="text" class="form-control" id="effectivestartdate" name="effectivestartdate" value="{{ entry[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">End Date</label>
+                <input type="text" class="form-control" id="effectiveenddate" name="effectiveenddate" value="{{ entry[2] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute1">NTN</label>
+                <input type="text" class="form-control" id="genericattribute1" name="genericattribute1" value="{{ entry[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute2">Retailer MSISDN</label>
+                <input type="text" class="form-control" id="genericattribute2" name="genericattribute2" value="{{ entry[4] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute3">Zone</label>
+                <input type="text" class="form-control" id="genericattribute3" name="genericattribute3" value="{{ entry[5] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute4">CNIC</label>
+                <input type="text" class="form-control" id="genericattribute4" name="genericattribute4" value="{{ entry[6] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute5">Parent Code</label>
+                <input type="text" class="form-control" id="genericattribute5" name="genericattribute5" value="{{ entry[7] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute6">City</label>
+                <input type="text" class="form-control" id="genericattribute6" name="genericattribute6" value="{{ entry[8] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute7">Region</label>
+                <input type="text" class="form-control" id="genericattribute7" name="genericattribute7" value="{{ entry[9] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute8">Contact Person</label>
+                <input type="text" class="form-control" id="genericattribute8" name="genericattribute8" value="{{ entry[10] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute9">Partner Postal Address</label>
+                <input type="text" class="form-control" id="genericattribute9" name="genericattribute9" value="{{ entry[11] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute10">RSO Code</label>
+                <input type="text" class="form-control" id="genericattribute10" name="genericattribute10" value="{{ entry[12] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute11">Tax Combination</label>
+                <input type="text" class="form-control" id="genericattribute11" name="genericattribute11" value="{{ entry[13] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute12">Email Address</label>
+                <input type="text" class="form-control" id="genericattribute12" name="genericattribute12" value="{{ entry[14] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute13">Category Name</label>
+                <input type="text" class="form-control" id="genericattribute13" name="genericattribute13" value="{{ entry[15] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute14">Lattitude</label>
+                <input type="text" class="form-control" id="genericattribute14" name="genericattribute14" value="{{ entry[16] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute15">Longitude</label>
+                <input type="text" class="form-control" id="genericattribute15" name="genericattribute15" value="{{ entry[17] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute16">Contact Number</label>
+                <input type="text" class="form-control" id="genericattribute16" name="genericattribute16" value="{{ entry[18] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber1">WHT Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber1" name="genericnumber1" value="{{ entry[19] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber2">GST Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber2" name="genericnumber2" value="{{ entry[20] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber3">GST Withheld</label>
+                <input type="text" class="form-control" id="genericnumber3" name="genericnumber3" value="{{ entry[21] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber4">Agg Tax Rate</label>
+                <input type="text" class="form-control" id="genericnumber4" name="genericnumber4" value="{{ entry[22] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber5">Partner Type ID</label>
+                <input type="text" class="form-control" id="genericnumber5" name="genericnumber5" value="{{ entry[23] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericnumber6">Partner Class ID</label>
+                <input type="text" class="form-control" id="genericnumber6" name="genericnumber6" value="{{ entry[24] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericdate1">Creation Date</label>
+                <input type="text" class="form-control" id="genericdate1" name="genericdate1" value="{{ entry[25] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericdate2">Update Date</label>
+                <input type="text" class="form-control" id="genericdate2" name="genericdate2" value="{{ entry[26] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericdate3">Creation End Date</label>
+                <input type="text" class="form-control" id="genericdate3" name="genericdate3" value="{{ entry[27] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericboolean1">Tax Exempted Flag</label>
+                <input type="text" class="form-control" id="genericboolean1" name="genericboolean1" value="{{ entry[28] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericboolean2">Status</label>
+                <input type="text" class="form-control" id="genericboolean2" name="genericboolean2" value="{{ entry[29] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ entry[30] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{ entry[31] }}" required>
+            </div>     
+            <div class="form-group">
+                <label for="islast">Is Last</label>
+                <input type="text" class="form-control" id="islast" name="islast" value="{{ entry[32] }}" required>
+            </div>    
+            <div class="form-group">
+                <label for="createdate">Create Date</label>
+                <input type="text" class="form-control" id="createdate" name="createdate" value="{{ entry[33] }}" required>
+            </div>          
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexRetailersError') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display Only Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+   
+    <link rel="stylesheet" href="/static/homebutton.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexProducts') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Products Table</span>
+            </a>
+            <h1 class="text-center">Product Display Only</h1>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+   
+        <form method="GET" action="{{ url_for('displayProducts') }}" class="form-inline mb-3">
+            <select class="form-control mr-2" name="field">
+                <option value="PRODUCTID" {% if search_field == 'PRODUCTID' %}selected{% endif %}>Product ID</option>
+                <option value="NAME" {% if search_field == 'NAME' %}selected{% endif %}>Name</option>
+                <option value="PRICE" {% if search_field == 'PRICE' %}selected{% endif %}>Price</option>
+                <!-- <option value="COST" {% if search_field == 'COST' %}selected{% endif %}>Cost</option> -->
+                <!-- Add more options as needed -->
+            </select>
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th>Actions</th> -->
+                        <th>PRODUCTID</th>
+                        <th>EFFECTIVESTARTDATE</th>
+                        <th>EFFECTIVEENDDATE</th>
+                        <!-- <th>Status</th> -->
+                        <th>NAME</th>
+                        <th>PRICE</th>
+                        <th>UNITTYPEFORPRICE</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                       
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <!-- <td>{{ 'Active' if row[3] == 1 else 'Not Active' }}</td> -->
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                     
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('displayProducts', page=page-1, search=search_query) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if page > 4 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('displayProducts', page=1, search=search_query) }}">1</a>
+                </li>
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+
+                {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('displayProducts', page=p, search=search_query) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages - 3 %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('displayProducts', page=total_pages, search=search_query) }}">{{ total_pages }}</a>
+                </li>
+                {% endif %}
+
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('displayProducts', page=page+1, search=search_query) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View History</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexhistorySalesTransactions') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Sales Transaction History</span>
+            </a>
+            <h1 class="text-center">History Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Sales Transaction Seq</th>
+                    <td>{{ history[0] }}</td>
+                </tr>
+                <tr>
+                    <th>Comments</th>
+                    <td>{{ history[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Compensation Date</th>
+                    <td>{{ history[2] }}</td>
+                </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <td>{{ history[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Retailer MSISDN</th>
+                    <td>{{ history[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Consumer MSISDN</th>
+                    <td>{{ history[5] }}</td>
+                </tr>
+                <tr>
+                    <th>Franchise ID</th>
+                    <td>{{ history[6] }}</td>
+                </tr>
+                <tr>
+                    <th>Correlation ID</th>
+                    <td>{{ history[7] }}</td>
+                </tr>
+                <tr>
+                    <th>Transaction ID</th>
+                    <td>{{ history[8] }}</td>
+                </tr>
+                <tr>
+                    <th>Commission</th>
+                    <td>{{ history[9] }}</td>
+                </tr>
+                <tr>
+                    <th>GST Result %</th>
+                    <td>{{ history[10] }}</td>
+                </tr>
+                <tr>
+                    <th>STW Result %</th>
+                    <td>{{ history[11] }}</td>
+                </tr>
+                <tr>
+                    <th>WHT Result %</th>
+                    <td>{{ history[12] }}</td>
+                </tr>
+                <tr>
+                    <th>Net Commission</th>
+                    <td>{{ history[13] }}</td>
+                </tr>
+                <tr>
+                    <th>Line Number</th>
+                    <td>{{ history[14] }}</td>
+                </tr>
+                <tr>
+                    <th>Order ID</th>
+                    <td>{{ history[15] }}</td>
+                </tr>
+                <tr>
+                    <th>Origin Type ID</th>
+                    <td>{{ history[16] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Description</th>
+                    <td>{{ history[17] }}</td>
+                </tr>
+                <tr>
+                    <th>Product ID</th>
+                    <td>{{ history[18] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Name</th>
+                    <td>{{ history[19] }}</td>
+                </tr>
+                <tr>
+                    <th>Sub Line Number</th>
+                    <td>{{ history[20] }}</td>
+                </tr>
+                <tr>
+                    <th>Value</th>
+                    <td>{{ history[21] }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ history[22] }}</td>
+                </tr>
+                <tr>
+                    <th>Sales Tax Withheld %</th>
+                    <td>{{ history[23] }}</td>
+                </tr>
+                <tr>
+                    <th>GST %</th>
+                    <td>{{ history[24] }}</td>
+                </tr>
+                <tr>
+                    <th>Withholding Tax %</th>
+                    <td>{{ history[25] }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ history[26] }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ history[27] }}</td>
+                </tr>
+                <tr>
+                    <th>RSOCODE</th>
+                    <td>{{ history[28] }}</td>
+                </tr>
+                <tr>
+                    <th>AggregatedTaxRate%</th>
+                    <td>{{ history[29] }}%</td>
+                </tr>
+                <tr>
+                    <th>TaxExemptedFlag</th>
+                    <td>{{ history[30] }}</td>
+                </tr>
+                <tr>
+                    <th>RetailerStatus</th>
+                    <td>{{ history[31] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

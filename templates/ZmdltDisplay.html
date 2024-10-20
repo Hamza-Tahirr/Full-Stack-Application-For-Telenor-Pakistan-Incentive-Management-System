@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Look Up Table</title>
+        <link rel="stylesheet" href="/static/bootstrap.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="/static/homebutton.css">
+        
+     
+    </head>
+<body>
+    <div class="container mt-5">
+        <!-- Home Button with Icon -->
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexZmdlt') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Look Up Table</span>
+            </a>
+            <h1 class="text-center">Look Up Table Display Only</h1>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        
+
+      
+
+        <form method="GET" action="{{ url_for('ZmdltDisplay') }}" class="form-inline mb-3">
+            <!-- Dropdown to select the field to search on -->
+            <select class="form-control mr-2" name="field" required>
+                <option value="" disabled selected>Select Field</option>
+                <!-- <option value="retailerid" {% if search_field == 'retailerid' %}selected{% endif %}>Retailer ID</option>
+                <option value="effectivestartdate" {% if search_field == 'effectivestartdate' %}selected{% endif %}>Start Date</option> -->
+                <option value="dim0" {% if search_field == 'dim0' %}selected{% endif %}>Franchise ID</option>
+                <option value="dim1" {% if search_field == 'dim1' %}selected{% endif %}>Product ID</option>
+                <option value="value" {% if search_field == 'value' %}selected{% endif %}>Commision</option>
+            </select>
+
+            <!-- Input for the search query -->
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search" value="{{ request.args.get('search', '') }}">
+        
+            <!-- Submit button -->
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                 
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Compaign Name</th>
+                    <th>Franchise ID</th>
+                    <th>Product ID</th>
+                    <th>Commision</th>
+                    <th>Unit Type</th>
+                    <th>Modification Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row[1] }}</td> 
+                    <td>{{ row[2] }}</td> 
+                    <td>{{ row[3] }}</td>  
+                    <td>{{ row[6] }}</td> 
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[4] }}</td> 
+                    <td>{{ row[5] }}</td>  
+                    <td>{{ row[8] }}</td>   
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('ZmdltDisplay', page=page-1, search=search_query, field=search_field) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% if page > 4 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('ZmdltDisplay', page=1, search=search_query, field=search_field) }}">1</a>
+            </li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+
+            {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('ZmdltDisplay', page=p, search=search_query, field=search_field) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if page < total_pages - 3 %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('ZmdltDisplay', page=total_pages, search=search_query, field=search_field) }}">{{ total_pages }}</a>
+            </li>
+            {% endif %}
+
+            {% if page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('ZmdltDisplay', page=page+1, search=search_query, field=search_field) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+<script>
+    // Hide the flash message after 5 seconds
+    setTimeout(function() {
+        var flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            flashMessage.style.display = 'none';
+        }
+    }, 3000);
+</script>
+</body>
+</html>

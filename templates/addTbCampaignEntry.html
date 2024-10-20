@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Campaign Entry</title>
+    <link rel="stylesheet" href="/static/homebutton.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+
+    <style>
+        /* Adjust the width of the select2 container */
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Home Button with Icon -->
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexTbCampaign') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Campaign Table</span>
+            </a>
+            <h1 class="text-center">Add Campaign Entry</h1>
+        </div>
+
+        <form method="POST" action="{{ url_for('addTbCampaignEntry') }}">
+            <div class="form-group">
+                <label for="campaignname">Campaign Name</label>
+                <input type="text" class="form-control" id="campaignname" name="campaignname" required>
+            </div>
+            <div class="form-group">
+                <label for="startdate">Start Date</label>
+                <input type="date" class="form-control" id="startdate" name="startdate" required>
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date</label>
+                <input type="date" class="form-control" id="enddate" name="enddate" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" required>
+            </div>
+            <div class="form-group">
+                <label for="targetcount">Target Count</label>
+                <input type="number" class="form-control" id="targetcount" name="targetcount" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2 on any dropdowns if needed
+            // Example: $('#status').select2({ placeholder: 'Select a Status' });
+
+            // Set up the date validation logic
+            $('#startdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                $('#enddate').attr('min', $(this).val());
+            });
+
+            $('#enddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#startdate').val());
+                
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');  // Clear the end date input
+                }
+            });
+        });
+    </script>
+</body>
+</html>

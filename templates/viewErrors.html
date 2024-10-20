@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Errors</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexTransactionsError') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Error Table</span>
+            </a>
+            <h1 class="text-center">Sales Transaction Error Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Sales Transaction Seq</th>
+                    <td>{{ error[0] }}</td>
+                </tr>
+                <tr>
+                    <th>Comments</th>
+                    <td>{{ error[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Compensation Date</th>
+                    <td>{{ error[2] }}</td>
+                </tr>
+                <tr>
+                    <th>Error Message</th>
+                    <td>{{ error[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <td>{{ error[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Retailer MSISDN</th>
+                    <td>{{ error[5] }}</td>
+                </tr>
+                <tr>
+                    <th>Consumer MSISDN</th>
+                    <td>{{ error[6] }}</td>
+                </tr>
+                <tr>
+                    <th>Franchise ID</th>
+                    <td>{{ error[7] }}</td>
+                </tr>
+                <tr>
+                    <th>Corelation ID</th>
+                    <td>{{ error[8] }}</td>
+                </tr>
+                <tr>
+                    <th>Transaction ID</th>
+                    <td>{{ error[9] }}</td>
+                </tr>
+                <tr>
+                    <th>Commission</th>
+                    <td>{{ error[10] }}</td>
+                </tr>
+                <tr>
+                    <th>GST Result %</th>
+                    <td>{{ error[11] }}%</td>
+                </tr>
+                <tr>
+                    <th>STW Result %</th>
+                    <td>{{ error[12] }}%</td>
+                </tr>
+                <tr>
+                    <th>WHT Result %</th>
+                    <td>{{ error[13] }}%</td>
+                </tr>
+                <tr>
+                    <th>Net Commission</th>
+                    <td>{{ error[14] }}</td>
+                </tr>
+                <tr>
+                    <th>Line Number</th>
+                    <td>{{ error[15] }}</td>
+                </tr>
+                <tr>
+                    <th>Order ID</th>
+                    <td>{{ error[16] }}</td>
+                </tr>
+                <tr>
+                    <th>Origin Type ID</th>
+                    <td>{{ error[17] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Description</th>
+                    <td>{{ error[18] }}</td>
+                </tr>
+                <tr>
+                    <th>Product ID</th>
+                    <td>{{ error[19] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Name</th>
+                    <td>{{ error[20] }}</td>
+                </tr>
+                <tr>
+                    <th>Sub Line Number</th>
+                    <td>{{ error[21] }}</td>
+                </tr>
+                <tr>
+                    <th>Value</th>
+                    <td>{{ error[22] }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ error[23] }}</td>
+                </tr>
+                <tr>
+                    <th>Sales Tax Withheld %</th>
+                    <td>{{ error[24] }}%</td>
+                </tr>
+                <tr>
+                    <th>GST %</th>
+                    <td>{{ error[25] }}%</td>
+                </tr>
+                <tr>
+                    <th>With Holding Tax %</th>
+                    <td>{{ error[26] }}%</td>
+                </tr>
+                <tr>
+                    <th>RetailerID</th>
+                    <td>{{ error[27] }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ error[28] }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ error[29] }}</td>
+                </tr>
+                <tr>
+                    <th>RSOCODE</th>
+                    <td>{{ error[30] }}</td>
+                </tr>
+                <tr>
+                    <th>AggregatedTaxRate%</th>
+                    <td>{{ error[31] }}%</td>
+                </tr>
+                <tr>
+                    <th>TaxExemptedFlag</th>
+                    <td>{{ error[32] }}</td>
+                </tr>
+                <tr>
+                    <th>RetailerStatus</th>
+                    <td>{{ error[33] }}</td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</body>
+</html>

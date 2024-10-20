@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Transaction Error Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/homebutton.css">  
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/bootstrap.js"></script>
+  
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Home Button with Icon -->
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('home') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Home</span>
+            </a>
+            <h1 class="text-center">TB Sales Transaction ERS Table</h1>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div id="flash-message" class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="text-left">
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#downloadErrorModal">
+                        <i class="fa-solid fa-eye"></i> Download Error Logs
+                    </button>
+                </div>
+            </div>
+        <!-- </div> -->
+        
+
+            <!-- Search Form -->
+            <form method="GET" action="{{ url_for('indexTbSalesTransaction') }}" class="form-inline mb-3">
+                <select class="form-control mr-2" name="field">
+                    <option value="salestransactionseq" {% if search_field == 'salestransactionseq' %}selected{% endif %}>Sales Transaction Seq</option>
+                    <option value="comments" {% if search_field == 'comments' %}selected{% endif %}>Comments</option>
+                    <option value="compensationdate" {% if search_field == 'compensationdate' %}selected{% endif %}>Compensation Date</option>
+                    <option value="error_msg" {% if search_field == 'error_msg' %}selected{% endif %}>Error Message</option>
+                    <option value="eventtype" {% if search_field == 'eventtype' %}selected{% endif %}>Event Type</option>
+                    <option value="genericattribute1" {% if search_field == 'genericattribute1' %}selected{% endif %}>Retailer MSISDN</option>
+                    <option value="genericattribute2" {% if search_field == 'genericattribute2' %}selected{% endif %}>Consumer MSISDN</option>
+                    <option value="genericattribute3" {% if search_field == 'genericattribute3' %}selected{% endif %}>Franchise ID</option>
+                    <option value="genericattribute6" {% if search_field == 'genericattribute6' %}selected{% endif %}>Corelation ID</option>
+                    <option value="genericattribute12" {% if search_field == 'genericattribute12' %}selected{% endif %}>Transaction ID</option>
+                    <option value="genericnumber1" {% if search_field == 'genericnumber1' %}selected{% endif %}>Commission</option>
+                    <option value="genericnumber2" {% if search_field == 'genericnumber2' %}selected{% endif %}>GST Result %</option>
+                    <option value="genericnumber3" {% if search_field == 'genericnumber3' %}selected{% endif %}>STW Result %</option>
+                    <option value="genericnumber4" {% if search_field == 'genericnumber4' %}selected{% endif %}>WHT Result %</option>
+                    <option value="genericnumber5" {% if search_field == 'genericnumber5' %}selected{% endif %}>Net Commission</option>
+                    <option value="linenumber" {% if search_field == 'linenumber' %}selected{% endif %}>Line Number</option>
+                    <option value="orderid" {% if search_field == 'orderid' %}selected{% endif %}>Order ID</option>
+                    <option value="origintypeid" {% if search_field == 'origintypeid' %}selected{% endif %}>Origin Type ID</option>
+                    <option value="productdescription" {% if search_field == 'productdescription' %}selected{% endif %}>Product Description</option>
+                    <option value="productid" {% if search_field == 'productid' %}selected{% endif %}>Product ID</option>
+                    <option value="productname" {% if search_field == 'productname' %}selected{% endif %}>Product Name</option>
+                    <option value="sublinenumber" {% if search_field == 'sublinenumber' %}selected{% endif %}>Sub Line Number</option>
+                    <option value="value" {% if search_field == 'value' %}selected{% endif %}>Value</option>
+                    <option value="genericattribute27" {% if search_field == 'genericattribute27' %}selected{% endif %}>Status</option>
+                    <option value="genericattribute28" {% if search_field == 'genericattribute28' %}selected{% endif %}>Sales Tax Withheld %</option>
+                    <option value="genericattribute29" {% if search_field == 'genericattribute29' %}selected{% endif %}>GST %</option>
+                    <option value="genericattribute30" {% if search_field == 'genericattribute30' %}selected{% endif %}>With Holding Tax %</option>
+                    <option value="channel" {% if search_field == 'channel' %}selected{% endif %}>Channel</option>
+                    <option value="genericattribute22" {% if search_field == 'genericattribute22' %}selected{% endif %}>City</option>
+                    <option value="genericattribute23" {% if search_field == 'genericattribute23' %}selected{% endif %}>Region</option>
+                    <option value="genericattribute24" {% if search_field == 'genericattribute24' %}selected{% endif %}>RSOCODE</option>
+                    <option value="genericattribute31" {% if search_field == 'genericattribute31' %}selected{% endif %}>Aggregated Tax Rate %</option>
+                    <option value="genericboolean1" {% if search_field == 'genericboolean1' %}selected{% endif %}>Tax Exempted Flag</option>
+                    <option value="genericboolean2" {% if search_field == 'genericboolean2' %}selected{% endif %}>Retailer Status</option>
+                </select>
+                <input class="form-control mr-2" type="text" name="search" placeholder="Search" value="{{ request.args.get('search', '') }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>SalesTransactionSeq</th>
+                            <th>Comments</th>
+                            <th>CompensationDate</th>
+                            <th>ErrorMessage</th>
+                            <th>EventType</th>
+                            <th>RetailerMSISDN</th>
+                            <th>ConsumerMSISDN</th>
+                            <th>FranchiseID</th>
+                            <th>CorelationID</th>
+                            <th>TransactionID</th>
+                            <th>Commission</th>
+                            <th>GSTResult%</th>
+                            <th>STWResult%</th>
+                            <th>WHTResult%</th>
+                            <th>NetCommission</th>
+                            <th>LineNumber</th>
+                            <th>OrderID</th>
+                            <th>OriginTypeID</th>
+                            <th>ProductDescription</th>
+                            <th>ProductID</th>
+                            <th>ProductName</th>
+                            <th>SubLineNumber</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>SalesTaxWithheld%</th>
+                            <th>GST%</th>
+                            <th>WithHoldingTax%</th>
+                            <th>RetailerID</th>
+                            <th>City</th>
+                            <th>Region</th>
+                            <th>RSOCODE</th>
+                            <th>AggregatedTaxRate%</th>
+                            <th>TaxExemptedFlag</th>
+                            <th>RetailerStatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                            <td>{{ row[6] }}</td>
+                            <td>{{ row[7] }}</td>
+                            <td>{{ row[8] }}</td>
+                            <td>{{ row[9] }}</td>
+                            <td>{{ row[10] }}</td>
+                            <td>{{ row[11] }}</td>
+                            <td>{{ row[12] }}</td>
+                            <td>{{ row[13] }}</td>
+                            <td>{{ row[14] }}</td>
+                            <td>{{ row[15] }}</td>
+                            <td>{{ row[16] }}</td>
+                            <td>{{ row[17] }}</td>
+                            <td>{{ row[18] }}</td>
+                            <td>{{ row[19] }}</td>
+                            <td>{{ row[20] }}</td>
+                            <td>{{ row[21] }}</td>
+                            <td>{{ row[22] }}</td>
+                            <td>{{ row[23] }}</td>
+                            <td>{{ row[24] }}</td>
+                            <td>{{ row[25] }}</td>
+                            <td>{{ row[26] }}</td>
+                            <td>{{ row[27] }}</td>
+                            <td>{{ row[28] }}</td>
+                            <td>{{ row[29] }}</td>
+                            <td>{{ row[30] }}</td>
+                            <td>{{ row[31] }}</td>
+                            <td>{{ row[32] }}</td>
+                            <td>{{ row[33] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Pagination -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <!-- Previous Page Link -->
+                    {% if page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('indexTbSalesTransaction', page=page-1, search=search_query, field=search_field) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <!-- First Page Link if there are more than 4 pages to skip -->
+                    {% if page > 4 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('indexTbSalesTransaction', page=1, search=search_query, field=search_field) }}">1</a>
+                    </li>
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+
+                    <!-- Page Number Links -->
+                    {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+                    <li class="page-item {% if p == page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('indexTbSalesTransaction', page=p, search=search_query, field=search_field) }}">{{ p }}</a>
+                    </li>
+                    {% endfor %}
+
+                    <!-- Last Page Link if there are more than 3 pages remaining -->
+                    {% if page < total_pages - 3 %}
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('indexTbSalesTransaction', page=total_pages, search=search_query, field=search_field) }}">{{ total_pages }}</a>
+                    </li>
+                    {% endif %}
+
+                    <!-- Next Page Link -->
+                    {% if page < total_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('indexTbSalesTransaction', page=page+1, search=search_query, field=search_field) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <!-- Download Error Modal -->
+<div class="modal fade" id="downloadErrorModal" tabindex="-1" aria-labelledby="downloadErrorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Download Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="downloadErrorForm">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="downloadOption" id="fullErrorLogs" value="full" checked>
+                        <label class="form-check-label" for="fullErrorLogs">
+                            Download Full Error Logs
+                        </label>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="radio" name="downloadOption" id="selectErrorDate" value="date">
+                        <label class="form-check-label" for="selectErrorDate">
+                            Select Date for Downloading Error Logs
+                        </label>
+                    </div>
+                    <div id="errorDatePicker" class="mt-3" style="display: none;">
+                        <div class="mb-3">
+                            <label for="errorStartDate" class="form-label">Start Date:</label>
+                            <input type="date" id="errorStartDate" name="startDate" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="errorEndDate" class="form-label">End Date:</label>
+                            <input type="date" id="errorEndDate" name="endDate" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="downloadErrorButton">Download</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const fullErrorLogsRadio = document.getElementById("fullErrorLogs");
+                const selectErrorDateRadio = document.getElementById("selectErrorDate");
+                const errorDatePicker = document.getElementById("errorDatePicker");
+                const downloadErrorButton = document.getElementById("downloadErrorButton");
+        
+                // Toggle date picker visibility based on selected radio button
+                function toggleErrorDatePicker() {
+                    if (selectErrorDateRadio.checked) {
+                        errorDatePicker.style.display = "block";
+                    } else {
+                        errorDatePicker.style.display = "none";
+                    }
+                }
+        
+                // Initial toggle based on default selection
+                toggleErrorDatePicker();
+        
+                // Add event listeners to radio buttons
+                fullErrorLogsRadio.addEventListener("change", toggleErrorDatePicker);
+                selectErrorDateRadio.addEventListener("change", toggleErrorDatePicker);
+        
+                // Handle download button click
+                downloadErrorButton.addEventListener("click", function() {
+                    const downloadOption = document.querySelector('input[name="downloadOption"]:checked').value;
+                    let url = "{{ url_for('indexTbSalesTransaction') }}?download=true";
+        
+                    // Preserve existing search parameters if any
+                    const searchQuery = "{{ search_query or '' }}";
+                    const searchField = "{{ search_field or 'salestransactionseq' }}";
+        
+                    if (searchQuery) {
+                        url += `&search=${encodeURIComponent(searchQuery)}&field=${encodeURIComponent(searchField)}`;
+                    }
+        
+                    if (downloadOption === "date") {
+                        const startDate = document.getElementById("errorStartDate").value;
+                        const endDate = document.getElementById("errorEndDate").value;
+        
+                        if (!startDate || !endDate) {
+                            alert("Please select both start and end dates.");
+                            return;
+                        }
+        
+                        // Optional: Validate that startDate <= endDate
+                        if (startDate > endDate) {
+                            alert("Start Date cannot be after End Date.");
+                            return;
+                        }
+        
+                        url += `&start_date=${startDate}&end_date=${endDate}`;
+                    }
+        
+                    // Redirect to the download URL
+                    window.location.href = url;
+        
+                    // Optionally, close the modal
+                    const downloadErrorModal = bootstrap.Modal.getInstance(document.getElementById('downloadErrorModal'));
+                    downloadErrorModal.hide();
+                });
+            });
+        </script>
+        <script>
+            // Hide the flash message after 3 seconds
+            setTimeout(function() {
+                var flashMessage = document.getElementById('flash-message');
+                if (flashMessage) {
+                    flashMessage.style.display = 'none';
+                }
+            }, 3000); // 3,000 milliseconds = 3 seconds
+        </script>
+
+    </div>
+</body>
+</html>

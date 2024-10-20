@@ -1,0 +1,57 @@
+body {
+    background-color: #e1effc;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #343a40;
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.form-group input {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    padding: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+.flash-message-container {
+    position: relative;
+}
+
+.flash-message {
+    margin-top: 20px;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.flash-message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.flash-message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

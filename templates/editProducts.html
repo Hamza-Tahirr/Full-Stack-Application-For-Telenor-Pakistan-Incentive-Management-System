@@ -1,0 +1,86 @@
+<!-- editProducts.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Product</h1>
+        <form action="{{ url_for('editProducts', productid=entry[0]) }}" method="POST">
+            <!-- Hide Product ID as it should not be editable -->
+            <input type="hidden" id="productid" name="productid" value="{{ entry[0] }}">
+            <!-- Hidden Effective Start Date and End Date -->
+            <!-- <input type="hidden" name="effectivestartdate" value="{{ entry[1] }}">
+            <input type="hidden" name="effectiveenddate" value="2200-01-01"> -->
+            <div class="form-group">
+                <label for="effectivestartdate">Effective Start Date</label>
+                <input type="datetime-local" class="form-control" id="effectivestartdate" name="effectivestartdate" value="{{ entry[1] }}">
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">Effective End Date</label>
+                <input type="datetime-local" class="form-control" id="effectiveenddate" name="effectiveenddate" value="{{ entry[2] }}">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ entry[3] }}">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{ entry[4] }}">
+            </div>
+            <div class="form-group">
+                <label for="unittypeforprice">Unit Type for Price</label>
+                <select class="form-control" id="unittypeforprice" name="unittypeforprice" required>
+                    <option value="PKR" {% if entry[5] == 'PKR' %}selected{% endif %}>PKR</option>
+                </select>
+            </div>
+            <!-- <div class="form-group">
+                <label for="cost">Cost</label>
+                <input type="text" class="form-control" id="cost" name="cost" value="{{ entry[6] }}">
+            </div>
+            <div class="form-group">
+                <label for="unittypeforcost">Unit Type for Cost</label>
+                <select class="form-control" id="unittypeforcost" name="unittypeforcost" required>
+                    <option value="PKR" {% if entry[7] == 'PKR' %}selected{% endif %}>PKR</option>
+                </select>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexProducts') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div> <script>
+        $(document).ready(function() {
+            // Function to add minutes to the start date
+            function addMinutesToDate(date, minutes) {
+                return new Date(date.getTime() + minutes * 2000);
+            }
+
+            // Set up the date validation logic
+            $('#effectivestartdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                var endDate = addMinutesToDate(startDate, 2);
+
+                // Set end date 2 minutes ahead of start date
+                $('#effectiveenddate').val(endDate.toISOString().slice(0, 16));
+                $('#effectiveenddate').attr('min', $(this).val());
+            });
+
+            $('#effectiveenddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#effectivestartdate').val());
+                
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');  // Clear the end date input
+                }
+            });
+        });
+    </script>
+</body>
+</html>

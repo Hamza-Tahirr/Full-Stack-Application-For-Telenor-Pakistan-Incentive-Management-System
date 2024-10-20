@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailer Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/homebutton.css">
+    
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this record?");
+        }
+
+        // Hide the flash message after 5 seconds
+        setTimeout(function() {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 5000);
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('home') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Home</span>
+            </a>
+            <h1 class="text-center">Retailer Table</h1>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div id="flash-message" class="alert alert-warning" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="d-flex justify-content-between mb-3">
+            <div class="text-left">
+                <a href="{{ url_for('addRetailerEntry') }}" class="btn btn-info">
+                    <i class="fa-solid fa-eye"></i> Add New Entry
+                </a>
+            </div>
+            <div class="text-right d-flex">
+                <!-- Download Excel Button -->
+                <a href="{{ url_for('indexRetailers', download='true') }}" class="btn btn-upload">
+                    <i class="fa-solid fa-download"></i> Download Excel
+                </a>
+            </div>
+        </div>
+
+        <!-- Search Form -->
+        <form method="GET" action="{{ url_for('indexRetailers') }}" class="form-inline mb-3">
+            <select class="form-control mr-2" name="field">
+                <option value="retailerid" {% if search_field == 'retailerid' %}selected{% endif %}>Retailer ID</option>
+                <option value="effectivestartdate" {% if search_field == 'effectivestartdate' %}selected{% endif %}>Start Date</option>
+                <option value="effectiveenddate" {% if search_field == 'effectiveenddate' %}selected{% endif %}>End Date</option>
+                <option value="genericattribute1" {% if search_field == 'genericattribute1' %}selected{% endif %}>NTN</option>
+                <option value="genericattribute2" {% if search_field == 'genericattribute2' %}selected{% endif %}>Retailer MSISDN</option>
+                <option value="genericattribute4" {% if search_field == 'genericattribute4' %}selected{% endif %}>CNIC</option>
+                <option value="genericattribute5" {% if search_field == 'genericattribute5' %}selected{% endif %}>Franchise ID</option>
+                <option value="genericattribute8" {% if search_field == 'genericattribute8' %}selected{% endif %}>Contact Person</option>
+                <option value="genericattribute9" {% if search_field == 'genericattribute9' %}selected{% endif %}>Partner Postal Address</option>
+                <option value="genericattribute10" {% if search_field == 'genericattribute10' %}selected{% endif %}>RSO Code</option>
+                <option value="genericattribute11" {% if search_field == 'genericattribute11' %}selected{% endif %}>Tax Combination</option>
+                <option value="genericattribute12" {% if search_field == 'genericattribute12' %}selected{% endif %}>Email Address</option>
+                <option value="genericattribute13" {% if search_field == 'genericattribute13' %}selected{% endif %}>Category Name</option>
+                <option value="genericattribute16" {% if search_field == 'genericattribute16' %}selected{% endif %}>Contact Number</option>
+                <option value="genericnumber1" {% if search_field == 'genericnumber1' %}selected{% endif %}>WHT Tax Rate</option>
+                <option value="genericnumber2" {% if search_field == 'genericnumber2' %}selected{% endif %}>GST Tax Rate</option>
+                <option value="genericnumber3" {% if search_field == 'genericnumber3' %}selected{% endif %}>GST Withheld</option>
+                <option value="genericnumber4" {% if search_field == 'genericnumber4' %}selected{% endif %}>Agg Tax Rate</option>
+                <option value="genericnumber5" {% if search_field == 'genericnumber5' %}selected{% endif %}>Partner Type ID</option>
+                <option value="genericnumber6" {% if search_field == 'genericnumber6' %}selected{% endif %}>Partner Class ID</option>
+                <option value="genericdate1" {% if search_field == 'genericdate1' %}selected{% endif %}>Creation Date</option>
+                <option value="genericdate2" {% if search_field == 'genericdate2' %}selected{% endif %}>Update Date</option>
+                <option value="genericboolean1" {% if search_field == 'genericboolean1' %}selected{% endif %}>Tax Exempted Flag</option>
+                <option value="genericboolean2" {% if search_field == 'genericboolean2' %}selected{% endif %}>Status</option>
+                <option value="name" {% if search_field == 'name' %}selected{% endif %}>Name</option>
+                <option value="description" {% if search_field == 'description' %}selected{% endif %}>Description</option>
+                <option value="createdate" {% if search_field == 'createdate' %}selected{% endif %}>Create Date</option>
+            </select>
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Actions/Display</th>
+                        <th>RetailerID</th>
+                        <th>StartDate</th>
+                        <th>EndDate</th>
+                        <th>NTN</th>
+                        <th>RetailerMSISDN</th>
+                        <th>Zone</th>
+                        <th>CNIC</th>
+                        <th>FranchiseID</th>
+                        <th>City</th>
+                        <th>Region</th>
+                        <th>ContactPerson</th>
+                        <th>PartnerPostalAddress</th>
+                        <th>RSOCode</th>
+                        <th>TaxCombination</th>
+                        <th>Email Address</th>
+                        <th>CategoryName</th>
+                        <th>Lattitude</th>
+                        <th>Longitude</th>
+                        <th>ContactNumber</th>
+                        <th>WHTTaxRate</th>
+                        <th>GSTTaxRate</th>
+                        <th>GSTWithheld</th>
+                        <th>AggTaxRate</th>
+                        <th>PartnerTypeID</th>
+                        <th>PartnerClassID</th>
+                        <th>CreationDate</th>
+                        <th>UpdateDate</th>
+                        <th>TaxExemptedFlag</th>
+                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>CreateDate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr> 
+                        <td>
+                            <a href="{{ url_for('viewRetailer', retailerid=row[0]) }}" class="text-info">
+                                <img src="{{ url_for('static', filename='display.svg') }}" alt="View" style="width: 18px; height: 18px;">
+                            </a>
+                            <a href="{{ url_for('editRetailers', retailerid=row[0]) }}" class="text-primary">
+                                <img src="{{ url_for('static', filename='edit.svg') }}" alt="Edit" style="width: 18px; height: 18px;">
+                            </a>
+                            <form action="{{ url_for('deleteRetailers', retailerid=row[0]) }}" method="POST" style="display:inline-block" onsubmit="return confirmDelete();">
+                                <button type="submit" class="btn btn-link text-danger p-0">
+                                    <img src="{{ url_for('static', filename='delete.svg') }}" alt="Delete" style="width: 18px; height: 18px;">
+                                </button>
+                            </form>
+                        </td>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>{{ row[8] }}</td>
+                        <td>{{ row[9] }}</td>
+                        <td>{{ row[10] }}</td>
+                        <td>{{ row[11] }}</td>
+                        <td>{{ row[12] }}</td>
+                        <td>{{ row[13] }}</td>
+                        <td>{{ row[14] }}</td>
+                        <td>{{ row[15] }}</td>
+                        <td>{{ row[16] }}</td>
+                        <td>{{ row[17] }}</td>
+                        <td>{{ row[18] }}</td>
+                        <td>{{ row[19] }}%</td> <!-- WHT Tax Rate -->
+                        <td>{{ row[20] }}%</td> <!-- GST Tax Rate -->
+                        <td>{{ row[21] }}%</td> <!-- GST Withheld -->
+                        <td>{{ row[22] }}%</td> <!-- Agg Tax Rate -->
+                        <td>{{ row[23] }}</td>
+                        <td>{{ row[24] }}</td>
+                        <td>{{ row[25] }}</td>
+                        <td>{{ row[26] }}</td>
+                        <td>{{ 'Yes' if row[27] == 1 else 'No' }}</td>
+                        <td>{{ 'Active' if row[28] == 1 else 'Not Active' }}</td>
+                        <td>{{ row[29] }}</td>
+                        <td>{{ row[30] }}</td>
+                        <td>{{ row[31] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('indexRetailers', page=page-1, search=search_query) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if page > 4 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('indexRetailers', page=1, search=search_query) }}">1</a>
+                </li>
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+
+                {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('indexRetailers', page=p, search=search_query) }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages - 3 %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('indexRetailers', page=total_pages, search=search_query) }}">{{ total_pages }}</a>
+                </li>
+                {% endif %}
+
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('indexRetailers', page=page+1, search=search_query) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+</body>
+</html>

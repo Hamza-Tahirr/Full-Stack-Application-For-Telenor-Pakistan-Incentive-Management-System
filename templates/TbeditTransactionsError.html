@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Entry</h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="salestransactionseq">Sales Transaction Seq</label>
+                <input type="text" class="form-control" id="salestransactionseq" name="salestransactionseq" value="{{ entry[0] }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <input type="text" class="form-control" id="comments" name="comments" value="{{ entry[1] }}" >
+            </div>
+            <div class="form-group">
+                <label for="compensationdate">Compensation Date</label>
+                <input type="date" class="form-control" id="compensationdate" name="compensationdate" value="{{ entry[2] }}" >
+            </div>
+            <div class="form-group">
+                <label for="error">Error Msg</label>
+                <input type="text" class="form-control" id="error" name="error" value="{{ entry[3] }}" >
+            </div>
+            <div class="form-group">
+                <label for="eventtype">Event Type</label>
+                <input type="text" class="form-control" id="eventtype" name="eventtype" value="{{ entry[4] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute1">Retailer MSISDN</label>
+                <input type="text" class="form-control" id="genericattribute1" name="genericattribute1" value="{{ entry[5] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute2">Consumer MSISDN</label>
+                <input type="text" class="form-control" id="genericattribute2" name="genericattribute2" value="{{ entry[6] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute3">Franchise ID</label>
+                <input type="text" class="form-control" id="genericattribute3" name="genericattribute3" value="{{ entry[7] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute6">Corelation ID</label>
+                <input type="text" class="form-control" id="genericattribute6" name="genericattribute6" value="{{ entry[8] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute12">Transaction ID</label>
+                <input type="text" class="form-control" id="genericattribute12" name="genericattribute12" value="{{ entry[9] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericnumber1">Commission</label>
+                <input type="text" class="form-control" id="genericnumber1" name="genericnumber1" value="{{ entry[10] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericnumber2">GST Result % </label>
+                <input type="text" class="form-control" id="genericnumber2" name="genericnumber2" value="{{ entry[11] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericnumber3">STW Result % </label>
+                <input type="text" class="form-control" id="genericnumber3" name="genericnumber3" value="{{ entry[12] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericnumber4">WHT Result % </label>
+                <input type="text" class="form-control" id="genericnumber4" name="genericnumber4" value="{{ entry[13] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericnumber5">Net Commission</label>
+                <input type="text" class="form-control" id="genericnumber5" name="genericnumber5" value="{{ entry[14] }}" >
+            </div>
+            <div class="form-group">
+                <label for="linenumber">Line Number</label>
+                <input type="text" class="form-control" id="linenumber" name="linenumber" value="{{ entry[15] }}" >
+            </div>
+            <div class="form-group">
+                <label for="orderid">Order ID</label>
+                <input type="text" class="form-control" id="orderid" name="orderid" value="{{ entry[16] }}" >
+            </div>
+            <div class="form-group">
+                <label for="origintypeid">Origin Type ID</label>
+                <input type="text" class="form-control" id="origintypeid" name="origintypeid" value="{{ entry[17] }}" >
+            </div>
+            <div class="form-group">
+                <label for="productdescription">Product Description</label>
+                <input type="text" class="form-control" id="productdescription" name="productdescription" value="{{ entry[18] }}" >
+            </div>
+            <div class="form-group">
+                <label for="productid">Product ID</label>
+                <input type="text" class="form-control" id="productid" name="productid" value="{{ entry[19] }}" >
+            </div>
+            <div class="form-group">
+                <label for="productname">Product Name</label>
+                <input type="text" class="form-control" id="productname" name="productname" value="{{ entry[20] }}" >
+            </div>
+            <div class="form-group">
+                <label for="sublinenumber">Sub Line Number</label>
+                <input type="text" class="form-control" id="sublinenumber" name="sublinenumber" value="{{ entry[21] }}" >
+            </div>
+            <div class="form-group">
+                <label for="value">Value</label>
+                <input type="text" class="form-control" id="value" name="value" value="{{ entry[22] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute27">Status</label>
+                <input type="text" class="form-control" id="genericattribute27" name="genericattribute27" value="{{ entry[23] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute28">Sales Tax Withheld %</label>
+                <input type="text" class="form-control" id="genericattribute28" name="genericattribute28" value="{{ entry[24] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute29">GST %</label>
+                <input type="text" class="form-control" id="genericattribute29" name="genericattribute29" value="{{ entry[25] }}" >
+            </div>
+            <div class="form-group">
+                <label for="genericattribute30">With Holding Tax %</label>
+                <input type="text" class="form-control" id="genericattribute30" name="genericattribute30" value="{{ entry[26] }}" >
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexTbTransactionsError') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+/* Body Styles */
+body {
+    background-color: #e1effc;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #1e37f8;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Flash Message Styles */
+#flash-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+    padding: 15px;
+    background-color: #ffc107;
+    color: #212529;
+    border-bottom: 2px solid #ffa000;
+}
+
+
+/* Container Styles */
+.container {
+    margin-left: 400px; /* Adjusted for wide sidebar */
+    max-width: 850px;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+}
+
+/* Video Background Styles */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+/* Logo Container Styles */
+.logo-container {
+    position: absolute;
+    top: 2.5rem;
+    left: 2rem;
+}
+
+.logo {
+    height: 8vw;
+    max-height: 50px;
+    width: auto;
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+h2 {
+    color: #0062c4;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+/* Button Styles */
+.btn {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    background-color: #0062c4;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px; /* Adjusted button width */
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    transform: translateY(-4px);
+    color: #0062c4;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Center Alignment */
+.text-center {
+    text-align: center;
+}
+
+/* Margin Top */
+.mt-5 {
+    margin-top: 4rem !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin-left: 20px;
+        padding: 1.5rem;
+    }
+
+    .sidebar {
+        width: 150px; /* Smaller sidebar for smaller screens */
+        padding: 15px;
+    }
+
+    .sidebar h2 {
+        font-size: 1.2rem;
+    }
+
+    .sidebar-btn {
+        font-size: 0.7rem;
+        padding: 5px;
+        width: 70px; /* Further reduced button width for smaller screens */
+    }
+
+    .logo {
+        height: 15vw;
+        max-height: 40px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .logo {
+        height: 20vw;
+        max-height: 30px;
+    }
+
+    .container {
+        padding: 1rem;
+        margin-left: 10px;
+    }
+}

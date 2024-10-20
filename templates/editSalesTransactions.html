@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Entry</h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="salestransactionseq">Sales Transaction Seq</label>
+                <input type="text" class="form-control" id="salestransactionseq" name="salestransactionseq" value="{{ entry[0] }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="channel">Channel</label>
+                <input type="text" class="form-control" id="channel" name="channel" value="{{ entry[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="productid">Product ID</label>
+                <input type="text" class="form-control" id="productid" name="productid" value="{{ entry[2] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute1">Generic Attribute 1</label>
+                <input type="text" class="form-control" id="genericattribute1" name="genericattribute1" value="{{ entry[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute2">Generic Attribute 2</label>
+                <input type="text" class="form-control" id="genericattribute2" name="genericattribute2" value="{{ entry[4] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute3">Generic Attribute 3</label>
+                <input type="text" class="form-control" id="genericattribute3" name="genericattribute3" value="{{ entry[5] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="genericattribute12">Generic Attribute 12</label>
+                <input type="text" class="form-control" id="genericattribute12" name="genericattribute12" value="{{ entry[6] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="linenumber">Line Number</label>
+                <input type="text" class="form-control" id="linenumber" name="linenumber" value="{{ entry[7] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="sublinenumber">Subline Number</label>
+                <input type="text" class="form-control" id="sublinenumber" name="sublinenumber" value="{{ entry[8] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="eventtype">Event Type</label>
+                <input type="text" class="form-control" id="eventtype" name="eventtype" value="{{ entry[9] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="origintypeid">Origin Type ID</label>
+                <input type="text" class="form-control" id="origintypeid" name="origintypeid" value="{{ entry[10] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="compensationdate">Compensation Date</label>
+                <input type="text" class="form-control" id="compensationdate" name="compensationdate" value="{{ entry[11] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="isrunnable">Is Runnable</label>
+                <input type="text" class="form-control" id="isrunnable" name="isrunnable" value="{{ entry[12] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="preadjustedvalue">Pre Adjusted Value</label>
+                <input type="text" class="form-control" id="preadjustedvalue" name="preadjustedvalue" value="{{ entry[13] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="unittypeforpreadjustedvalue">Unit Type For Pre Adjusted Value</label>
+                <input type="text" class="form-control" id="unittypeforpreadjustedvalue" name="unittypeforpreadjustedvalue" value="{{ entry[14] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Value</label>
+                <input type="text" class="form-control" id="value" name="value" value="{{ entry[15] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="unittypeforvalue">Unit Type For Value</label>
+                <input type="text" class="form-control" id="unittypeforvalue" name="unittypeforvalue" value="{{ entry[16] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="modificationdate">Modification Date</label>
+                <input type="text" class="form-control" id="modificationdate" name="modificationdate" value="{{ entry[17] }}" required>
+            </div>
+            
+            
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexSalesTransactions') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

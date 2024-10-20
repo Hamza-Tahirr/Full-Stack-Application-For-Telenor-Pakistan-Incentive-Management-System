@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Products</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexProducts') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Product Table</span>
+            </a>
+            <h1 class="text-center">Product Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Product ID</th>
+                    <td>{{ product[0] }}</td>
+                </tr>
+                <tr>
+                    <th>Effective Start Date</th>
+                    <td>{{ product[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Effective End Date</th>
+                    <td>{{ product[2] }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ product[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ product[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Unit Type For Price</th>
+                    <td>{{ product[5] }}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

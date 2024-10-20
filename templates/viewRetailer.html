@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Retailer</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexRetailers') }}" class="btn btn-home ">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Retailer Table</span>
+            </a>
+            <h1 class="text-center">Retailer Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Retailer ID</th>
+                    <td>{{ retailer[0] }}</td>
+                </tr>
+                <tr>
+                    <th>Effective Start Date</th>
+                    <td>{{ retailer[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Effective End Date</th>
+                    <td>{{ retailer[2] }}</td>
+                </tr>
+                <tr>
+                    <th>NTN</th>
+                    <td>{{ retailer[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Retailer MSISDN</th>
+                    <td>{{ retailer[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Zone</th>
+                    <td>{{ retailer[5] }}</td>
+                </tr>
+                <tr>
+                    <th>CNIC</th>
+                    <td>{{ retailer[6] }}</td>
+                </tr>
+                <tr>
+                    <th>Franchise ID</th>
+                    <td>{{ retailer[7] }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ retailer[8] }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ retailer[9] }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Person</th>
+                    <td>{{ retailer[10] }}</td>
+                </tr>
+                <tr>
+                    <th>Partner Postal Address</th>
+                    <td>{{ retailer[11] }}</td>
+                </tr>
+                <tr>
+                    <th>RSO Code</th>
+                    <td>{{ retailer[12] }}</td>
+                </tr>
+                <tr>
+                    <th>Tax Combination</th>
+                    <td>{{ retailer[13] }}</td>
+                </tr>
+                <tr>
+                    <th>Email Address</th>
+                    <td>{{ retailer[14] }}</td>
+                </tr>
+                <tr>
+                    <th>Category Name</th>
+                    <td>{{ retailer[15] }}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{ retailer[16] }}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{ retailer[17] }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Number</th>
+                    <td>{{ retailer[18] }}</td>
+                </tr>
+                <tr>
+                    <th>WHT Tax Rate</th>
+                    <td>{{ retailer[19] }}%</td>
+                </tr>
+                <tr>
+                    <th>GST Tax Rate</th>
+                    <td>{{ retailer[20] }}%</td>
+                </tr>
+                <tr>
+                    <th>GST Withheld</th>
+                    <td>{{ retailer[21] }}%</td>
+                </tr>
+                <tr>
+                    <th>Agg Tax Rate</th>
+                    <td>{{ retailer[22] }}%</td>
+                </tr>
+                <tr>
+                    <th>Partner Type ID</th>
+                    <td>{{ retailer[23] }}</td>
+                </tr>
+                <tr>
+                    <th>Partner Class ID</th>
+                    <td>{{ retailer[24] }}</td>
+                </tr>
+                <tr>
+                    <th>Creation Date</th>
+                    <td>{{ retailer[25] }}</td>
+                </tr>
+                <tr>
+                    <th>Update Date</th>
+                    <td>{{ retailer[26] }}</td>
+                </tr>
+                <tr>
+                    <th>Tax Exempted Flag</th>
+                    <td>{{ 'Yes' if retailer[27] == 1 else 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ 'Active' if retailer[28] == 1 else 'Not Active' }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ retailer[29] }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ retailer[30] }}</td>
+                </tr>
+                <tr>
+                    <th>Created Date</th>
+                    <td>{{ retailer[31] }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>

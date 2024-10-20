@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Table</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/homebutton.css">
+    
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Home Button with Icon -->
+        <div class="mb-3 text-left">
+           <a href="{{ url_for('home') }}" class="btn btn-home ">
+               <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+               <span style="font-size: 16px; font-weight: bold;">Home</span>
+           </a>
+           <h1 class="text-center">Sales Transaction Table</h1>
+       </div>
+        <div class="mb-3 text-right">
+            <a href="{{ url_for('addSalesEntry') }}" class="btn btn-success">Add New Entry</a>
+        </div>
+        <form method="GET" action="{{ url_for('indexSalesTransactions') }}" class="form-inline mb-3">
+            <input class="form-control mr-2" type="text" name="search" placeholder="Search by Sales Transaction Seq" value="{{ request.args.get('search', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Actions</th>
+                    <th>Sales Transaction Seq</th>
+                    <th>Channel</th>
+                    <th>Product ID</th>
+                    <th>Generic Attribute 1</th>
+                    <th>Generic Attribute 2</th>
+                    <th>Generic Attribute 3</th>
+                    <th>Generic Attribute 12</th>
+                    <th>Line Number</th>
+                    <th>Subline Number</th>
+                    <th>Event Type</th>
+                    <th>Origin Type ID</th>
+                    <th>Compensation Date</th>
+                    <th>Is Runnable</th>
+                    <th>Pre Adjusted Value</th>
+                    <th>Unit Type Pre Adjusted Value</th>
+                    <th>Value</th>
+                    <th>Unit Type For Value</th>
+                    <th>Modification Date</th>
+                    <!-- <th>Actions</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('editSalesTransactions', salestransactionseq=row[0]) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ url_for('deleteSalesTransactions', salestransactionseq=row[0]) }}" method="POST" style="display:inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row [11] }}</td>
+                    <td>{{ row [12] }}</td>
+                    <td>{{ row [13] }}</td>
+                    <td>{{ row [14] }}</td>
+                    <td>{{ row [15] }}</td>
+                    <td>{{ row [16] }}</td>
+                    <td>{{ row [17] }}</td>
+
+                    <!-- <td>
+                        <a href="{{ url_for('editSalesTransactions', salestransactionseq=row[0]) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="{{ url_for('deleteSalesTransactions', salestransactionseq=row[0]) }}" method="POST" style="display:inline-block;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexSalesTransactions', page=page-1, search=search_query) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% if page > 4 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexSalesTransactions', page=1, search=search_query) }}">1</a>
+            </li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+
+            {% for p in range(max(1, page - 3), min(total_pages + 1, page + 4)) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('indexSalesTransactions', page=p, search=search_query) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+
+            {% if page < total_pages - 3 %}
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexSalesTransactions', page=total_pages, search=search_query) }}">{{ total_pages }}</a>
+            </li>
+            {% endif %}
+
+            {% if page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('indexSalesTransactions', page=page+1, search=search_query) }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script> -->
+</body>
+</html>

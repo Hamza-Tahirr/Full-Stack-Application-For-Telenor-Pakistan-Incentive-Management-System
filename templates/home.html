@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 220px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 25px;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            margin-bottom: 3rem;
+            text-align: center;
+            width: 100%;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .sidebar-btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            flex-grow: 1;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+
+        .sidebar-footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .sidebar-btn {
+            width: 200px; /* Button width */
+            margin: 10px 0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: white;
+            background-color: #0078d7;
+            border: 1px solid #0056a6;
+            transition: all 0.3s ease;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-btn:hover {
+            background-color: #ffffff;
+            color: #0056a6;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container Styles */
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-left: 220px; /* Adjusted to match sidebar width */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+            text-align: center;
+            margin: 0 auto; /* Center the container */
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div id="flash-message" class="alert alert-warning" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="color: #ffffff;">TELENOR</h2>
+        </div>
+        <div class="sidebar-btn-container">
+            <a href="{{ url_for('home') }}" class="btn btn-success sidebar-btn">Home</a>
+            <a href="{{ url_for('add_user') }}" class="btn btn-success sidebar-btn">Add User</a>
+            <a href="{{ url_for('change_password') }}" class="btn btn-secondary sidebar-btn">Change Password</a>
+            <a href="{{ url_for('campaign1') }}" class="btn btn-primary sidebar-btn">Power Load</a>
+            <a href="{{ url_for('campaign2') }}" class="btn btn-primary sidebar-btn">Target Based</a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="{{ url_for('logout') }}" class="btn btn-danger sidebar-btn">Logout</a>
+        </div>
+    </div>
+
+    <!-- Container Content Based on Campaign -->
+    <div class="video-background">
+        <video autoplay muted loop id="background-video">
+            <source src="{{ url_for('static', filename='background.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="container-wrapper">
+        <div class="container mt-5">
+            <div class="logo-container">
+                <!-- <img src="{{ url_for('static', filename='telenor.png') }}" alt="Logo" class="logo"> -->
+            </div>
+            <h1 class="text-center" style="color: black;">Welcome to the Home Page</h1>
+
+            <!-- Add Campaign Buttons if no campaign is selected -->
+            {% if not campaign %}
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <a href="{{ url_for('campaign1') }}" class="btn btn-primary btn-lg">Power Load</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('campaign2') }}" class="btn btn-primary btn-lg">Target Based</a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Render different content based on campaign -->
+            {% if campaign == 'campaign1' %}
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h2 class="text-center">Master Data</h2>
+                    <div class="text-center">
+                        <a href="{{ url_for('indexRetailers') }}" class="btn btn-primary btn-lg">Retailer</a>
+                        <a href="{{ url_for('indexProducts') }}" class="btn btn-primary btn-lg">Product</a>
+                        <a href="{{ url_for('indexZmdlt') }}" class="btn btn-primary btn-lg">Look Up Table</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Transaction Data</h2>
+                    <div class="text-center">
+                        <a href="{{ url_for('indexhistorySalesTransactions') }}" class="btn btn-primary btn-lg">Sales Transaction History</a>
+                        <a href="{{ url_for('indexTransactionsError') }}" class="btn btn-primary btn-lg">Sales Transaction Error</a>
+                        <a href="{{ url_for('manual_commissions') }}" class="btn btn-primary btn-lg">Manual Commissions</a>
+                    </div>
+                </div>
+            </div>
+            {% elif campaign == 'campaign2' %}
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h2 class="text-center">Master Data</h2>
+                    <div class="text-center">
+                        <a href="{{ url_for('indexTbCampaign') }}" class="btn btn-primary btn-lg">Tb Campaign</a>
+                        <a href="{{ url_for('indexTbCommissionLookup') }}" class="btn btn-primary btn-lg">Tb Commission Lookup</a>
+                        <!-- <a href="{{ url_for('indexZmdlt') }}" class="btn btn-primary btn-lg">Look Up Table</a> -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Transaction Data</h2>
+                    <div class="text-center">
+                        <a href="{{ url_for('indexTbTransactionsError') }}" class="btn btn-primary btn-lg">Tb Transaction Error</a>
+                        <a href="{{ url_for('indexTbSalesTransaction') }}" class="btn btn-primary btn-lg">Tb Sales Transaction ERS</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Hide the flash message after 5 seconds
+        setTimeout(function () {
+            var flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.style.display = 'none';
+            }
+        }, 4000);
+    </script>
+</body>
+
+</html>

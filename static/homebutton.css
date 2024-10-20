@@ -1,0 +1,14 @@
+.btn-home {
+    margin-left: 10px;
+    margin-bottom: 0px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-home:hover {
+    background-color: #777a7d;
+    transform: scale(1.05);
+}
+
+
+
+

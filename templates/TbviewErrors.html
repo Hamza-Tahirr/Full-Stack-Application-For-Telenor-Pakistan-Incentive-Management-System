@@ -1,0 +1,161 @@
+<!-- templates/TbviewErrors.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Sales Transaction Error</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 text-left">
+            <a href="{{ url_for('indexTbTransactionsError') }}" class="btn btn-home">
+                <img src="/static/home.png" alt="Home" style="width: 24px; height: 26px; margin-right: 8px;">
+                <span style="font-size: 16px; font-weight: bold;">Tb Transactions Error</span>
+            </a>
+            <h1 class="text-center">Tb Transactions Error Details</h1>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Sales Transaction Seq</th>
+                    <td>{{ error[0] }}</td>
+                </tr>
+                <tr>
+                    <th>Comments</th>
+                    <td>{{ error[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Compensation Date</th>
+                    <td>{{ error[2] }}</td>
+                </tr>
+                <tr>
+                    <th>Error</th>
+                    <td>{{ error[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Event Type</th>
+                    <td>{{ error[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 1</th>
+                    <td>{{ error[5] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 2</th>
+                    <td>{{ error[6] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 3</th>
+                    <td>{{ error[7] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 6</th>
+                    <td>{{ error[8] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 12</th>
+                    <td>{{ error[9] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Number 1</th>
+                    <td>{{ error[10] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Number 2</th>
+                    <td>{{ error[11] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Number 3</th>
+                    <td>{{ error[12] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Number 4</th>
+                    <td>{{ error[13] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Number 5</th>
+                    <td>{{ error[14] }}</td>
+                </tr>
+                <tr>
+                    <th>Line Number</th>
+                    <td>{{ error[15] }}</td>
+                </tr>
+                <tr>
+                    <th>Order ID</th>
+                    <td>{{ error[16] }}</td>
+                </tr>
+                <tr>
+                    <th>Origin Type ID</th>
+                    <td>{{ error[17] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Description</th>
+                    <td>{{ error[18] }}</td>
+                </tr>
+                <tr>
+                    <th>Product ID</th>
+                    <td>{{ error[19] }}</td>
+                </tr>
+                <tr>
+                    <th>Product Name</th>
+                    <td>{{ error[20] }}</td>
+                </tr>
+                <tr>
+                    <th>Sub Line Number</th>
+                    <td>{{ error[21] }}</td>
+                </tr>
+                <tr>
+                    <th>Value</th>
+                    <td>{{ error[22] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 27</th>
+                    <td>{{ error[23] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 28</th>
+                    <td>{{ error[24] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 29</th>
+                    <td>{{ error[25] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 30</th>
+                    <td>{{ error[26] }}</td>
+                </tr>
+                <tr>
+                    <th>Channel</th>
+                    <td>{{ error[27] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 22</th>
+                    <td>{{ error[28] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 23</th>
+                    <td>{{ error[29] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 24</th>
+                    <td>{{ error[30] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Attribute 31</th>
+                    <td>{{ error[31] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Boolean 1</th>
+                    <td>{{ error[32] }}</td>
+                </tr>
+                <tr>
+                    <th>Generic Boolean 2</th>
+                    <td>{{ error[33] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

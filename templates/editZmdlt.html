@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Entry</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/sales.css">
+    <link rel="stylesheet" href="/static/Select2.css">
+
+    <script src="/static/JQUERY1.js"></script>
+    <script src="/static/Select2.js"></script>
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Edit Entry</h1>
+        <form action="" method="POST">
+            <div class="form-group">
+                <label for="effectivestartdate">Effective Start Date</label>
+                <input type="date" class="form-control" id="effectivestartdate" name="effectivestartdate" 
+                value="{{ entry[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="effectiveenddate">Effective End Date</label>
+                <input type="date" class="form-control" id="effectiveenddate" name="effectiveenddate" 
+                value="{{ entry[2] }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mdltname">Campaign Name</label>
+                <input type="text" class="form-control" id="mdltname" name="mdltname" value="{{ entry[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="value">Commission</label>
+                <input type="text" class="form-control" id="value" name="value" value="{{ entry[4] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dim0">Franchise ID</label>
+                <select class="form-control" id="dim0" name="dim0" required>
+                    {% for franchise in franchises %}
+                        <option value="{{ franchise[0] }}" {% if franchise[0] == entry[5] %}selected{% endif %}>{{ franchise[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dim1">Product ID</label>
+                <select class="form-control" id="dim1" name="dim1" required>
+                    {% for product in products %}
+                        <option value="{{ product[0] }}" {% if product[0]|string == entry[6]|string %}selected{% endif %}>{{ product[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ url_for('indexZmdlt') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#dim0').select2({
+                placeholder: 'Select a Franchise ID'
+            });
+            $('#dim1').select2({
+                placeholder: 'Select a Product ID'
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            function addMinutesToDate(date, minutes) {
+                return new Date(date.getTime() + minutes * 2000);
+            }
+
+            $('#effectivestartdate').on('change', function() {
+                var startDate = new Date($(this).val());
+                var endDate = addMinutesToDate(startDate, 2);
+                $('#effectiveenddate').val(endDate.toISOString().slice(0, 16));
+                $('#effectiveenddate').attr('min', $(this).val());
+            });
+
+            $('#effectiveenddate').on('change', function() {
+                var endDate = new Date($(this).val());
+                var startDate = new Date($('#effectivestartdate').val());
+
+                if (endDate < startDate) {
+                    alert("End date cannot be earlier than start date.");
+                    $(this).val('');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
