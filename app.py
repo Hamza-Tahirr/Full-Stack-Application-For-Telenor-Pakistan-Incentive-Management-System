@@ -3128,6 +3128,11 @@ def manual_commissions():
 
 
 
+#######################################################################################################################################################################################
+
+
+
+
 #NEW CAMPAIGN ROUTES
 
 # TB Sales Transaction Error Table
@@ -3858,10 +3863,7 @@ def addTbCampaignEntry():
             flash("STATUS must be either 0 or 1.")
             return redirect(url_for('indexTbCampaign'))
 
-        # Check if STARTDATE is before ENDDATE
-        # if startdate >= enddate:
-        #     flash("STARTDATE must be before ENDDATE.")
-        #     return redirect(url_for('addTbCampaignEntry'))
+       
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -3978,8 +3980,6 @@ def viewTbCampaign(campaignid):
     return render_template('viewTbCampaign.html', campaign=campaign_data)
 
 
-
-
 # Z_TB_COMMISSION_LOOKUP TABLE
 @app.route('/TbCommissionLookup', methods=['GET', 'POST'])
 def indexTbCommissionLookup():
@@ -4009,6 +4009,25 @@ def indexTbCommissionLookup():
                     flash(error_message.strip())
                     return redirect(url_for('indexTbCommissionLookup'))
 
+                # Check for missing values in specific columns
+                if df[['STARTDATE', 'ENDDATE', 'COMMISSIONVALUE']].isnull().any().any():
+                    missing_values = df[['STARTDATE', 'ENDDATE', 'COMMISSIONVALUE']].isnull().sum()
+                    error_message = "Error: The following fields have missing values:\n"
+                    for field, count in missing_values.items():
+                        if count > 0:
+                            error_message += f"{field}: {count} missing values\n"
+                    flash(error_message.strip())
+                    return redirect(url_for('indexTbCommissionLookup'))
+
+                # Validate RETAILERID and PRODUCTID as strings
+                if not df['RETAILERID'].apply(lambda x: isinstance(x, str)).all():
+                    flash("Error: All RETAILERID values must be strings.")
+                    return redirect(url_for('indexTbCommissionLookup'))
+
+                if not df['PRODUCTID'].apply(lambda x: isinstance(x, str)).all():
+                    flash("Error: All PRODUCTID values must be strings.")
+                    return redirect(url_for('indexTbCommissionLookup'))
+
                 # Explicit date parsing
                 df['STARTDATE'] = pd.to_datetime(df['STARTDATE'], errors='coerce')
                 df['ENDDATE'] = pd.to_datetime(df['ENDDATE'], errors='coerce')
@@ -4016,13 +4035,19 @@ def indexTbCommissionLookup():
                 # Remove rows where dates are invalid (NaT values)
                 df.dropna(subset=['STARTDATE', 'ENDDATE'], inplace=True)
 
+                # Check if STARTDATE is before ENDDATE
+                for index, row in df.iterrows():
+                    if row['STARTDATE'] >= row['ENDDATE']:
+                        flash(f"Error: The STARTDATE in row {index + 2} must be before the ENDDATE.")
+                        return redirect(url_for('indexTbCommissionLookup'))
+
                 conn = get_db_connection()
                 cursor = conn.cursor()
 
                 # Prepare data for insertion
                 new_entries = []
                 for index, row in df.iterrows():
-                    # Check if the record already exists
+                    # Check for duplicates
                     cursor.execute("""
                         SELECT COUNT(*) FROM Z_TB_COMMISSION_LOOKUP
                         WHERE RETAILERID = ? AND PRODUCTID = ? AND STARTDATE = ? AND ENDDATE = ?
@@ -4030,7 +4055,6 @@ def indexTbCommissionLookup():
                     exists = cursor.fetchone()[0]
 
                     if exists == 0:
-                        # If the record does not exist, add it to the new entries
                         new_entries.append((
                             row['RETAILERID'], row['PRODUCTID'], row['STARTDATE'], row['ENDDATE'], row['COMMISSIONVALUE']
                         ))
@@ -4042,9 +4066,9 @@ def indexTbCommissionLookup():
                         VALUES (?, ?, ?, ?, ?)
                     """, new_entries)
                     conn.commit()
-                    flash('New entries added successfully.')
+                    flash('Excel file data successfully processed and added to the database.')
                 else:
-                    flash('No new entries to add.')
+                    flash('No new entries were added as all records already exist in the database.')
 
                 cursor.close()
                 conn.close()
